@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PractitionerCard from './PractitionerCard'
 
-function PractitionerList() {
-    const practUrl= "http"
 
+
+class PractitionerList extends Component {
+
+
+    render(){    
     return (
         <div>
-            <PractitionerCard />
+            {this.props.practData.map((pract) => 
+            <PractitionerCard key={pract.id} practitioner={pract} /> )}
         </div>
-    )
+       
+    )}
 }
 
-export default PractitionerList
+export default PractitionerList;
