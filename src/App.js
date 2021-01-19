@@ -18,7 +18,8 @@ class App extends Component {
 
   state ={
     practitioners: [],
-    isLoggedin: false
+    isLoggedin: false,
+    currentUser: {}
   }
 
   componentDidMount(){
@@ -26,6 +27,13 @@ class App extends Component {
     .then(response => response.json())
     .then (data => this.setState({ practitioners : data}))
 }
+
+  handleLogin= (data) =>{
+    this.setState({
+      isLoggedin: !this.state.isLoggedin,
+      currentUser: data
+    })
+  }
 
   render(){
   return (
@@ -37,7 +45,7 @@ class App extends Component {
         <Route exact path="/login" render={() => <LoginForm /> } />
         <Route exact path="/about" render={() => <About /> } />
         <Route exact path="/signup" render={() => <SignUp /> } /> 
-        <Route exact path="/dashboard" render={() => <UserDashboard /> } />
+        <Route exact path="/dashboard" render={() => this.state.isLoggedin ? <UserDashboard /> : null } />
       </BrowserRouter>
     </div>
   )}
