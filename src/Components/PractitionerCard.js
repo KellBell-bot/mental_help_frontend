@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function PractitionerCard({ practitioner }) {
 
@@ -6,7 +7,7 @@ export default function PractitionerCard({ practitioner }) {
     // console.log(filter_issues)
 
     const practIssues= Object.entries(filter_issues).map(([key, value]) => value.title)
-    console.log(practIssues[1])
+    
     return (  
     // <!-- Question Listing Item Card -->
     <div className="bg-white rounded-lg shadow-sm hover:shadow-lg duration-500 px-2 sm:px-6 md:px-2 py-4 my-6">
@@ -23,9 +24,9 @@ export default function PractitionerCard({ practitioner }) {
                 <div className="block sm:hidden"></div>
                     
                 <div className="mt-2">
-                    <a href="#" className="sm:text-sm md:text-md lg:text-lg text-gray-700 font-bold hover:underline">
+                    <Link to={`/practitioner/${practitioner.id}`} className="sm:text-sm md:text-md lg:text-lg text-gray-700 font-bold hover:underline">
                         {name}
-                    </a>
+                    </Link>
 
                 <div className="flex justify-between items-center sm:block">
                     <span className="font-light text-gray-600">
