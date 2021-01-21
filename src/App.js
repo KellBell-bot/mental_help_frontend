@@ -31,11 +31,14 @@ class App extends Component {
     this.setState({ practitioners : data})
 }
 
-  handleLogin= (data) =>{
+  handleLogin= (userData) =>{
     this.setState({
       isLoggedin: !this.state.isLoggedin,
-      currentUser: data
+      currentUser: userData
+      
     })
+    localStorage.setItem("currentUser", userData)
+    
   }
 
   render(){
@@ -47,10 +50,10 @@ class App extends Component {
         <Route  exact path="/" render={() =>  <Hero />} />
         <Route  exact path="/" render={() =>  <PractitionerList practData= {this.state.practitioners}/>} />
         <Route  exact path="/practitioner/:id" render={(props) =>  { const paramsID = props.match.params.id; 
-                                                                      console.log(paramsID)
+                                                                      
                                                                     const practitionerDeets = this.state.practitioners.find(practitioner => practitioner.id == paramsID)
-                                                                    console.log(practitionerDeets)
-                                                                    return <PractitionerProfile practitionerInfo={practitionerDeets}/>}} />
+                                                                   
+                                                                    return <PractitionerProfile practitionerInfo={practitionerDeets} currentUser={this.state.currentUser}/>}} />
         <Route exact path="/login" render={() => <LoginForm handleLogin= {this.handleLogin}/> } />
         <Route exact path="/about" render={() => <About /> } />
         <Route exact path="/signup" render={() => <SignUp /> } /> 

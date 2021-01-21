@@ -25,12 +25,13 @@ class LoginForm extends Component {
         })
         .then(response => response.json())
         .then(userData => {
-            localStorage.setItem('currentUser', 'userData')
             this.props.handleLogin(userData)
             this.props.history.push("/dashboard")
+            console.log(userData)
+            
         })
     }
-
+// const currentUser= localStorage.getItem(this.currentUser)
 
 render(){
     
