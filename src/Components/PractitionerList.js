@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PractitionerCard from './PractitionerCard'
-import Filter from '../Containers/Filter'
+
 
 
 
@@ -8,11 +8,14 @@ class PractitionerList extends Component {
 
 
     render(){    
+        // const issues= this.props.practData.filter((pract)=> console.log(pract.filter_issues.map(array => array.title)))
+    //    const issues= this.props.practData
+       
+      
     return (
         <div>
-            <Filter />
-            {this.props.practData.map((pract) => 
-            <PractitionerCard key={pract.id} practitioner={pract} /> )}
+            {this.props.practData.filter((pract)=> pract.zip_code.includes(this.props.inputText)).map((pract) => 
+            <PractitionerCard key={pract.id} practitioner={pract} /> )} 
         </div>
        
     )}

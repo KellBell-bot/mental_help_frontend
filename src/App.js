@@ -7,6 +7,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import { NavBar } from './Components/NavBar';
 import { Hero } from './Components/Hero';
 import About from './Components/About'
+import Filter from './Containers/Filter'
 import LoginForm from './Containers/LoginForm'
 import SignUp from './Containers/SignUp'
 import PractitionerList from './Components/PractitionerList';
@@ -22,7 +23,8 @@ class App extends Component {
   state ={
     practitioners: [],
     isLoggedin: false,
-    currentUser: {}
+    currentUser: {},
+    inputValue: ""
   }
 
   async componentDidMount(){
@@ -31,6 +33,8 @@ class App extends Component {
     this.setState({ practitioners : data})
   }
   
+  handleTextChange = inputValue => this.setState({ inputValue })
+
   handleLogin= (userData) =>{
     this.setState({
       isLoggedin: !this.state.isLoggedin,
@@ -41,6 +45,11 @@ class App extends Component {
     
   }
 
+  // handlePractIssues=()=>{
+
+   
+  // }
+
   handleLogout=(event)=>{
 
 
@@ -48,12 +57,14 @@ class App extends Component {
 
   render(){
     const alert = this.props.alert
+   
   return (
     <div className="">
       <BrowserRouter>
         <NavBar />
         <Route  exact path="/" render={() =>  <Hero />} />
-        <Route  exact path="/" render={() =>  <PractitionerList practData= {this.state.practitioners}/>} />
+        <Filter handleTextChange= {this.handleTextChange}/>
+        <Route  exact path="/" render={() =>  <PractitionerList  inputText={this.state.inputValue} practData= {this.state.practitioners}/>} />
         <Route  exact path="/practitioner/:id" render={(props) =>  { const paramsID = props.match.params.id; 
                                                                       
                                                                     const practitionerDeets = this.state.practitioners.find(practitioner => practitioner.id == paramsID)

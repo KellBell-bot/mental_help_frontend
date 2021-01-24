@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { Component }from 'react'
 
-export default function Filter() {
+export default class Filter extends Component {
+    render(){
     return (
-        <div>
-            
-        </div>
+      
+        <div class="form-outline">
+        <input type="search" id="form1" placeholder="Search by Specialty or zip code" onChange={(event) => this.props.handleTextChange(event.target.value)} class="form-control"></input>
+      </div>
     )
+    }
 }

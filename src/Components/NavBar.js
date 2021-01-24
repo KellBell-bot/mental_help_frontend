@@ -27,7 +27,7 @@ export const NavBar = () => {
             </button>
       
      
-        <div id="sideMenuHideOnMobile" className="bg-white font-semibold z-10 rounded-bl-md flex absolute top-0 right-0 transition-all duration-500 transform translate-x-0
+        <div id="sideMenuHideOnMobile" className="bg-white  font-semibold z-10 rounded-bl-md flex absolute top-0 right-0 transition-all duration-500 transform translate-x-0
                                               w-1/2 md:w-auto
                                               px-3 md:px-0
                                               flex-col md:flex-row
