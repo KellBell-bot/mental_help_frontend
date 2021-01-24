@@ -27,7 +27,7 @@ class LoginForm extends Component {
         .then(userData => {
             this.props.handleLogin(userData)
             this.props.history.push("/dashboard")
-            console.log(userData)
+            // console.log(userData)
             
         })
     }

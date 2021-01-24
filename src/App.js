@@ -29,16 +29,21 @@ class App extends Component {
     const response = await fetch(practUrl)
     const data = await response.json()
     this.setState({ practitioners : data})
-}
-
+  }
+  
   handleLogin= (userData) =>{
     this.setState({
       isLoggedin: !this.state.isLoggedin,
       currentUser: userData
       
     })
-    localStorage.setItem("currentUser", userData)
+    sessionStorage.setItem("currentUser", JSON.stringify(userData))
     
+  }
+
+  handleLogout=(event)=>{
+
+
   }
 
   render(){
@@ -53,11 +58,11 @@ class App extends Component {
                                                                       
                                                                     const practitionerDeets = this.state.practitioners.find(practitioner => practitioner.id == paramsID)
                                                                    
-                                                                    return <PractitionerProfile practitionerInfo={practitionerDeets} currentUser={this.state.currentUser}/>}} />
+                                                                    return <PractitionerProfile practitionerInfo={practitionerDeets} {...props} handleLogin={this.handleLogin}/>}} />
         <Route exact path="/login" render={() => <LoginForm handleLogin= {this.handleLogin}/> } />
         <Route exact path="/about" render={() => <About /> } />
         <Route exact path="/signup" render={() => <SignUp /> } /> 
-        <Route exact path="/dashboard" render={() => this.state.isLoggedin ? <UserDashboard userData={ this.state.currentUser } /> : null  } />
+        <Route exact path="/dashboard" render={() => this.state.isLoggedin ? <UserDashboard userData={ this.state.currentUser }/> : null  } />
       </BrowserRouter>
     </div>
   )}

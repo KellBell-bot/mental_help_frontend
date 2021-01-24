@@ -24,7 +24,7 @@ export const NavBar = () => {
             <svg id="mobileMenuButtonOpen" className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
-        </button>
+            </button>
       
      
         <div id="sideMenuHideOnMobile" className="bg-white font-semibold z-10 rounded-bl-md flex absolute top-0 right-0 transition-all duration-500 transform translate-x-0
@@ -34,8 +34,13 @@ export const NavBar = () => {
                                               -translate-y-full md:translate-y-0
                                               md:mt-1 md:items-center md:mx-1 md:uppercase">
             <Link to="/about" className="mx-0 sm:mx-2 my-2 border-b-2 border-transparent hover:border-pink-600 hover:text-pink-700 transition-all duration-500 py-1 sm:p-0">About</Link>
+            <hr/>
             <Link to="/signup" className="mx-0 sm:mx-2 my-2 border-b-2 border-transparent hover:border-pink-600 hover:text-pink-700 transition-all duration-500 py-1 sm:p-0">Sign Up</Link>
+            <block/>
             <Link to="/login" className="mx-0 sm:mx-2 my-2 border-b-2 border-transparent hover:border-pink-600 hover:text-pink-700 transition-all duration-500 py-1 sm:p-0">Login</Link>
+            <block/>
+   
+            <Link to="/logout" className="mx-0 sm:mx-2 my-2 border-b-2 border-transparent hover:border-pink-600 hover:text-pink-700 transition-all duration-500 py-1 sm:p-0">Logout</Link>
         </div>
       
     </nav>

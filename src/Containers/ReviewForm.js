@@ -5,7 +5,7 @@ export default class ReviewForm extends Component {
     
     state={
         comment: "",
-        currentUser: ""
+        user: ""
     }
     
     onSubmit= async (event)=>{
