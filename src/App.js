@@ -63,7 +63,9 @@ class App extends Component {
       <BrowserRouter>
         <NavBar />
         <Route  exact path="/" render={() =>  <Hero />} />
+        <div className="px-4 pt-4">
         <Filter handleTextChange= {this.handleTextChange}/>
+        </div>
         <Route  exact path="/" render={() =>  <PractitionerList  inputText={this.state.inputValue} practData= {this.state.practitioners}/>} />
         <Route  exact path="/practitioner/:id" render={(props) =>  { const paramsID = props.match.params.id; 
                                                                       

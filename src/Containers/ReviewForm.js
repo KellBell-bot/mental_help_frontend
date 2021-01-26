@@ -4,25 +4,30 @@ import ReviewCard from '../Components/ReviewCard'
 export default class ReviewForm extends Component {
     
     state={
-        comment: "",
-        user: ""
+        comment: ""
+        
     }
     
-    onSubmit= async (event)=>{
+    submitReview= async (event)=>{
         event.preventDefault()
 
-        const newReview= {
-            comment: this.state.comment
+        const review= {
+            comment: this.state.comment,
+            user_id: JSON.parse(sessionStorage.getItem("currentUser")).id,
+            practitioner_id: this.props.practID
         }
 
-        const responce= await fetch ("http://localhost:3000/reviews", {
+         fetch ("http://localhost:3000/reviews", {
             method: "POST",
             headers: {"Content-Type" : "application/json"},
-            body: JSON.stringify(newReview)
-        })
-       const reviewData= await responce.json()
-       this.props.handleNewReview(reviewData)
-        event.target.reset()
+            body: JSON.stringify({review}),
+            
+        }).then(response => response.json())
+        .then(data => this.props.handleNewReview(data))
+    //    const reviewData= await responce.json()
+       
+    //    this.props.handleNewReview(reviewData.review)
+       event.target.reset()
     }
 
     
@@ -31,7 +36,7 @@ export default class ReviewForm extends Component {
         return (
             <div>
              <div className="flex items-center justify-center shadow-lg mt-30 mx-8 mb-4 max-w-lg">
-                <form className="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
+                <form  onSubmit={(event) => this.submitReview(event)} className="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <h2 className="px-4 pt-3 pb-2 text-gray-800 text-lg">Add a new comment</h2>
                     <div className="w-full md:w-full px-3 mb-2 mt-2">
@@ -44,7 +49,7 @@ export default class ReviewForm extends Component {
                                     
                         </div>
                         <div className="-mr-1">
-                        <input type='submit' onSubmit={(event) => this.submitForm(event)} className="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100" value='Add Review'/>    
+                        <input type='submit' className="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100" value='Add Review'/>    
                         </div>
                     </div>
                     </div>

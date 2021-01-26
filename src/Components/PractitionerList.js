@@ -8,9 +8,9 @@ class PractitionerList extends Component {
 
 
     render(){    
-        // const issues= this.props.practData.filter((pract)=> console.log(pract.filter_issues.map(array => array.title)))
-    //    const issues= this.props.practData
-       
+        // const issues= this.props.practData.filter((pract)=> (pract.filter_issues.some(array => array.title === this.props.inputText)))
+      
+    //    console.log(this.props.practData)
       
     return (
         <div>

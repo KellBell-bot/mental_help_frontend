@@ -1,11 +1,12 @@
 import React from 'react'
 import ReviewCard from '../Components/ReviewCard'
+import AppointmentNotes from './AppointmentNotes'
 
 export default function UserDashboard({userData}) {
     
     
-    const {name, email, filter_reviews}= userData
-    // console.log(userData)
+    const {name, email, filter_reviews, appointment_notes}= userData
+    
    const myReviews= Object.entries(filter_reviews).map(([key, value]) => value.comment)
 
 
@@ -27,13 +28,13 @@ export default function UserDashboard({userData}) {
                 <div className="col-span-12 w-full px-3 py-6 justify-center flex space-x-4 border-b border-solid md:space-x-0 md:space-y-4 md:flex-col md:col-span-2 md:justify-start ">
                     <a href="#" className="text-sm p-2 bg-indigo-900 text-white text-center rounded font-bold">Basic Information</a>
 
-                    <a href="#" className="text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200">Another Information</a>
+                    <a href="#" className="text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200">Selected Practitoners</a>
 
-                    <a href="#" className="text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200">Another Something</a>
-
+                    <a href="#" className="text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200">Appointment Notes</a>
                     </div>
                     <div className="col-span-12 md:border-solid md:border-l md:border-black md:border-opacity-25 h-full pb-12 md:col-span-10">
                         <div className="px-4 pt-4">
+                        <AppointmentNotes notesArray={appointment_notes}/>
                         <form action="#" className="flex flex-col space-y-8">
                         <div>
                         <h3 className="text-2xl font-semibold">Basic Information</h3>
@@ -58,7 +59,7 @@ export default function UserDashboard({userData}) {
                                 <h3 className="text-2xl font-semibold ">Reviews By Me: </h3>
                                 <hr></hr>
                             </div>
-                            {myReviews.map(review => <ReviewCard ked={review.id} reviewData={review}/>)}
+                            {myReviews.map(review => <ReviewCard ked={review.id} reviewData={review} />)}
                         </form>   
                         </div>
                     </div>

@@ -37,9 +37,7 @@ export default class PractitionerProfile extends Component {
             
         handleNewReview=(reviewData)=>{
             this.setState({
-                reviews: ({reviews: [...this.state.reviews, reviewData],
-                            user: (JSON.parse(sessionStorage.getItem("currentUser")))
-                })
+                reviews: [...this.state.reviews, reviewData]
                            
             })
 
@@ -49,7 +47,7 @@ export default class PractitionerProfile extends Component {
 
 
     render() {
-            const practReviews = (this.state.reviews)
+            // const practReviews = (this.state.reviews)
             const issuesArray= (this.state.practitionerInfo.filter_issues)
             
            
@@ -92,8 +90,8 @@ export default class PractitionerProfile extends Component {
                                 <div className="d-flex align-items-center justify-content-between mb-3">
                                     <h5 className="mb-0 text-bold">Reviews</h5><button onClick={() => this.handleShowForm()} className="btn btn-link text-muted">Add review</button>
                                 </div>
-                                {this.state.showForm ? <ReviewForm handleNewReview={this.handleNewReview} handleUser={this.handleUser}/> : null}
-                             <ReviewsContainer reviewComment={practReviews} /> 
+                                {this.state.showForm ? <ReviewForm handleNewReview={this.handleNewReview} practID={this.props.match.params.id} handleUser={this.handleUser}/> : null}
+                             <ReviewsContainer reviewComment={this.state.reviews} /> 
                         </div>
                     </div> 
         </div>
