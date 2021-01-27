@@ -4,8 +4,8 @@ import './assets/output.css';
 import React, { Component } from "react";
 import { withAlert } from 'react-alert';
 import { BrowserRouter, Route } from 'react-router-dom'
-import { NavBar } from './Components/NavBar';
-import { Hero } from './Components/Hero';
+import NavBar  from './Components/NavBar';
+import Hero  from './Components/Hero';
 import About from './Components/About'
 import Filter from './Containers/Filter'
 import LoginForm from './Containers/LoginForm'
@@ -23,49 +23,44 @@ class App extends Component {
   state ={
     practitioners: [],
     isLoggedin: false,
-    currentUser: {},
-    inputValue: ""
+    currentUser: 0,
+    inputValue: "",
+    showSearch: false,
+    
   }
 
   async componentDidMount(){
     const response = await fetch(practUrl)
     const data = await response.json()
+    
     this.setState({ practitioners : data})
   }
   
   handleTextChange = inputValue => this.setState({ inputValue })
 
   handleLogin= (userData) =>{
+    sessionStorage.setItem("currentUser", userData.id)
     this.setState({
-      isLoggedin: !this.state.isLoggedin,
-      currentUser: userData
-      
+      isLoggedin: true
+    }) 
+  }
+
+  handleShowSearch =() => {
+    this.setState({
+        showSearch: !this.state.showSearch
     })
-    sessionStorage.setItem("currentUser", JSON.stringify(userData))
-    
-  }
-
-  // handlePractIssues=()=>{
-
-   
-  // }
-
-  handleLogout=(event)=>{
-
-
-  }
+}
+ 
 
   render(){
     const alert = this.props.alert
+    // console.log(this.state.practitioners)
    
   return (
     <div className="">
       <BrowserRouter>
         <NavBar />
-        <Route  exact path="/" render={() =>  <Hero />} />
-        <div className="px-4 pt-4">
-        <Filter handleTextChange= {this.handleTextChange}/>
-        </div>
+        <Route  exact path="/" render={() =>  <Hero handleshowSeacrh={this.handleShowSearch} handleTextChange= {this.handleTextChange}/>} />
         <Route  exact path="/" render={() =>  <PractitionerList  inputText={this.state.inputValue} practData= {this.state.practitioners}/>} />
         <Route  exact path="/practitioner/:id" render={(props) =>  { const paramsID = props.match.params.id; 
                                                                       
@@ -75,7 +70,7 @@ class App extends Component {
         <Route exact path="/login" render={() => <LoginForm handleLogin= {this.handleLogin}/> } />
         <Route exact path="/about" render={() => <About /> } />
         <Route exact path="/signup" render={() => <SignUp /> } /> 
-        <Route exact path="/dashboard" render={() => this.state.isLoggedin ? <UserDashboard userData={ this.state.currentUser }/> : null  } />
+        <Route exact path="/dashboard" render={() =>  <UserDashboard userData={ this.state.currentUser }/> } />
       </BrowserRouter>
     </div>
   )}

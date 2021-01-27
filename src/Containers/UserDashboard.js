@@ -1,21 +1,45 @@
-import React from 'react'
+import React, { Component }from 'react'
 import ReviewCard from '../Components/ReviewCard'
 import AppointmentNotes from './AppointmentNotes'
 
-export default function UserDashboard({userData}) {
+class UserDashboard extends Component {
     
+    state={
+        name: "",
+        email: "",
+        filter_reviews: [],
+        appointment_notes: []
+    }
     
-    const {name, email, filter_reviews, appointment_notes}= userData
-    
-   const myReviews= Object.entries(filter_reviews).map(([key, value]) => value.comment)
+    componentDidMount(){
+        const user= sessionStorage.getItem("currentUser")
 
+        fetch(`http://localhost:3000/users/${user}`)
+        .then(response => response.json())
+        .then(data=> 
+            
 
+        
+            this.setState({ 
+                name: data.name,
+                email: data.email,
+                filter_reviews: data.filter_reviews,
+                appointment_notes: data.appointment_notes
+            })
+            )
+    }
+    
+    
     // const userReviews= Object.entries(filter_reviews).map(([key, value]) => value.title)
-    // console.log(userReviews[1])
-
+    render() {
+        //console.log(user)
+        const { name, email, filter_reviews, appointment_notes}= this.state
+        
+        const myReviews= Object.entries(filter_reviews).map(([key, value]) => value.comment)
+       
     return (
         <div className="bg-purple-100">
-            <div className="w-full bg-purple-100 relative mt-4 shadow-2xl rounded my-24 overflow-hidden">
+            <div className="w-full bg-purple-100 relative mt-0 shadow-2xl rounded my-24 overflow-hidden">
                 <div className="top h-64 w-full bg-blue-600 overflow-hidden relative" >
                     <img src="https://images.unsplash.com/photo-1493571716545-b559a19edd14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="" className="bg w-full h-full object-cover object-center absolute z-0"/>
                     <div className="flex flex-col justify-center items-center relative h-full bg-black bg-opacity-50 text-white">
@@ -34,7 +58,7 @@ export default function UserDashboard({userData}) {
                     </div>
                     <div className="col-span-12 md:border-solid md:border-l md:border-black md:border-opacity-25 h-full pb-12 md:col-span-10">
                         <div className="px-4 pt-4">
-                        <AppointmentNotes notesArray={appointment_notes}/>
+                        <AppointmentNotes notesArray={this.state.appointment_notes}/>
                         <form action="#" className="flex flex-col space-y-8">
                         <div>
                         <h3 className="text-2xl font-semibold">Basic Information</h3>
@@ -68,4 +92,7 @@ export default function UserDashboard({userData}) {
         </div>
     
     )
-}
+ }
+ }
+
+export default UserDashboard

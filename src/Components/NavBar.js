@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-export const NavBar = () => {
+class NavBar extends Component {
+
+    handleLogout=()=>{
+        sessionStorage.clear()
+      }
+
+    render(){
     return (
+    
        <div>
         {/* <!-- I've set max-w-screen-md, you may need to change it --> */}
     <nav className="bg-white shadow fixed max-w-screen-md z-10 mx-auto inset-x-0 top-0 flex justify-between items-center">
@@ -32,15 +39,15 @@ export const NavBar = () => {
                                               px-3 md:px-0
                                               flex-col md:flex-row
                                               -translate-y-full md:translate-y-0
-                                              md:mt-1 md:items-center md:mx-1 md:uppercase">
-            <Link to="/about" className="mx-0 sm:mx-2 my-2 border-b-2 border-transparent hover:border-pink-600 hover:text-pink-700 transition-all duration-500 py-1 sm:p-0">About</Link>
-            <hr/>
-            <Link to="/signup" className="mx-0 sm:mx-2 my-2 border-b-2 border-transparent hover:border-pink-600 hover:text-pink-700 transition-all duration-500 py-1 sm:p-0">Sign Up</Link>
-            <block/>
-            <Link to="/login" className="mx-0 sm:mx-2 my-2 border-b-2 border-transparent hover:border-pink-600 hover:text-pink-700 transition-all duration-500 py-1 sm:p-0">Login</Link>
-            <block/>
+                                              md:mt-1 md:items-center md:mx-1 md:lowercase">
+            <Link to="/about" className="mx-0 sm:mx-2 my-2 border-b-2 border-transparent hover:border-pink-600 hover:text-pink-700 transition-all duration-500 py-1 sm:p-0">About. </Link>
+            <span/>
+            <Link to="/signup" className="mx-0 sm:mx-2 my-2 border-b-2 border-transparent hover:border-pink-600 hover:text-pink-700 transition-all duration-500 py-1 sm:p-0">Sign Up. </Link>
+            <span/>
+            <Link to="/login" className="mx-0 sm:mx-2 my-2 border-b-2 border-transparent hover:border-pink-600 hover:text-pink-700 transition-all duration-500 py-1 sm:p-0">Login.</Link>
+            <span/>
    
-            <Link to="/logout" className="mx-0 sm:mx-2 my-2 border-b-2 border-transparent hover:border-pink-600 hover:text-pink-700 transition-all duration-500 py-1 sm:p-0">Logout</Link>
+            <Link to="/" onClick={this.handleLogout} className="mx-0 sm:mx-2 my-2 border-b-2 border-transparent hover:border-pink-600 hover:text-pink-700 transition-all duration-500 py-1 sm:p-0">Logout</Link>
         </div>
       
     </nav>
@@ -49,3 +56,6 @@ export const NavBar = () => {
 </div>
     )
 }
+}
+export default NavBar
+

@@ -19,7 +19,7 @@ class AppointmentNotes extends Component {
         <div className="d-flex align-items-center justify-content-between mb-3">
           <h5 className="mb-0 text-bold">Appointment Notes</h5><button onClick={() => this.handleNoteForm()} className="btn btn-link text-muted">Add note</button>
         </div>
-          {this.state.showForm === true ? <AddNoteForm /> : null }
+          {this.state.showForm === true ? <AddNoteForm notesArray={this.props.notesArray} /> : null }
          {this.props.notesArray.map(appnote => <Note key={appnote.id} noteData={appnote}/>)} 
         
       </div>
