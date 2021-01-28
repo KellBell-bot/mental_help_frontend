@@ -29,14 +29,20 @@ class App extends Component {
     
   }
 
-  async componentDidMount(){
-    const response = await fetch(practUrl)
-    const data = await response.json()
+ componentDidMount(){
+    fetch(practUrl)
+      .then(response => response.json())
+      .then(data => this.setState({ practitioners : data}))
+        this.setState({inputValue: ""})
+      
     
-    this.setState({ practitioners : data})
   }
   
   handleTextChange = inputValue => this.setState({ inputValue })
+
+  handleInputReload=() => {
+    this.setState({inputValue: ""})
+  }
 
   handleLogin= (userData) =>{
     sessionStorage.setItem("currentUser", userData.id)
@@ -62,7 +68,7 @@ class App extends Component {
   return (
     <div className="">
       <BrowserRouter>
-        <NavBar />
+        <NavBar handleInputReload={this.handleInputReload} />
         <Route exact path="/dashboard" render={() =>  <UserDashboard userData={ this.state.currentUser }/> } />
         <Route  exact path="/" render={() =>  <Hero handleshowSeacrh={this.handleShowSearch} handleTextChange= {this.handleTextChange}/>} />
         {sessionStorage.getItem("currentUser") !== null ? <Link to="/dashboard" className="btn btn-link text-muted ">Back to Dashboard</Link> : null}

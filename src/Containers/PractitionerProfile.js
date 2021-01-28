@@ -69,7 +69,7 @@ export default class PractitionerProfile extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="bg-light p-4 d-flex justify-content-left text-center">
+                            <div className="p-4 rounded shadow-sm bg-light justify-content-left text-center">
                                 <ul className="list-inline mb-0">
                                     <li className="list-inline-item">
                                         <h5 className="font-weight-bold mb-0 d-block">Specialties:</h5>
@@ -88,7 +88,7 @@ export default class PractitionerProfile extends Component {
                                     <p className="font-italic mb-0">Phone: {this.state.practitionerInfo.phone}</p>
                                 </div>
                             </div>
-                                <div className="d-flex align-items-center justify-content-between mb-3">
+                                <div className="d-flex align-items-center px-4 justify-content-between mb-3">
                                     <h5 className="mb-0 text-bold">Reviews</h5><button onClick={() => this.handleShowForm()} className="btn btn-link text-muted">Add review</button>
                                 </div>
                                 {this.state.showForm ? <ReviewForm handleNewReview={this.handleNewReview} practID={this.props.match.params.id} handleUser={this.handleUser}/> : null}

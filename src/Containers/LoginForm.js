@@ -54,7 +54,7 @@ render(){
                         <form className="mt-10" method="POST">
                             {/* <!-- Email Input --> */}
                             <label for="email" className="block text-xs font-semibold text-gray-600 uppercase">E-mail</label>
-                            <input onChange={(event) => this.setState({email: event.target.value})} type="email" name="email" placeholder="e-mail address"
+                            <input autocomplete="off" onChange={(event) => this.setState({email: event.target.value})} type="email" name="email" placeholder="e-mail address"
                                 className="block w-full py-3 px-1 mt-2 
                                 text-gray-800 appearance-none 
                                 border-b-2 border-gray-100
