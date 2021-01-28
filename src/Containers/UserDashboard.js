@@ -1,6 +1,7 @@
 import React, { Component }from 'react'
 import ReviewCard from '../Components/ReviewCard'
 import AppointmentNotes from './AppointmentNotes'
+import Tab from './Tab'
 
 class UserDashboard extends Component {
     
@@ -8,7 +9,9 @@ class UserDashboard extends Component {
         name: "",
         email: "",
         filter_reviews: [],
-        appointment_notes: []
+        appointment_notes: [],
+        notesTab: false
+        // selectedTab: 'Basic Info'
     }
     
     componentDidMount(){
@@ -24,10 +27,18 @@ class UserDashboard extends Component {
                 name: data.name,
                 email: data.email,
                 filter_reviews: data.filter_reviews,
-                appointment_notes: data.appointment_notes
+                appointment_notes: data.appointment_notes,
+               
             })
             )
     }
+
+    handleShowNotes =()=>{
+        this.setState({notesTab: !this.state.notesTab})
+    }
+    // setSelectedTab=(tab)=>{
+    //     this.setState({selected: tab })
+    // }
     
     
     // const userReviews= Object.entries(filter_reviews).map(([key, value]) => value.title)
@@ -36,8 +47,13 @@ class UserDashboard extends Component {
         const { name, email, filter_reviews, appointment_notes}= this.state
         
         const myReviews= Object.entries(filter_reviews).map(([key, value]) => value.comment)
+
+        // const tab= ["Basic Info", "Appointment Notes", "Selected Practitioners"]
+
+        // const active=(tab === this.state.selectedTab ? active : "")
        
     return (
+
         <div className="bg-purple-100">
             <div className="w-full bg-purple-100 relative mt-0 shadow-2xl rounded my-24 overflow-hidden">
                 <div className="top h-64 w-full bg-blue-600 overflow-hidden relative" >
@@ -49,16 +65,20 @@ class UserDashboard extends Component {
                     </div>
                 </div>
                 <div className="grid grid-cols-12 bg-white ">
-                <div className="col-span-12 w-full px-3 py-6 justify-center flex space-x-4 border-b border-solid md:space-x-0 md:space-y-4 md:flex-col md:col-span-2 md:justify-start ">
-                    <a href="#" className="text-sm p-2 bg-indigo-900 text-white text-center rounded font-bold">Basic Information</a>
+                     <div className="col-span-12 w-full px-3 py-6 justify-center flex space-x-4 border-b border-solid md:space-x-0 md:space-y-4 md:flex-col md:col-span-2 md:justify-start ">
+                        <a href="#" onClick={() => this.handleShowNotes()} className={"text-sm p-2 bg-indigo-900 text-white text-center rounded font-bold"}>Basic Information</a>
 
-                    <a href="#" className="text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200">Selected Practitoners</a>
+                        {/* <a href="#"  className={"text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200"  }>Selected Practitoners</a> */}
 
-                    <a href="#" className="text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200">Appointment Notes</a>
+                        <a href="#" onClick={() => this.handleShowNotes()} className={"text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200" }>Appointment Notes</a>
                     </div>
+                    
                     <div className="col-span-12 md:border-solid md:border-l md:border-black md:border-opacity-25 h-full pb-12 md:col-span-10">
-                        <div className="px-4 pt-4">
-                        <AppointmentNotes notesArray={this.state.appointment_notes}/>
+                         <div className="px-4 pt-4">
+                             {this.state.notesTab ? <AppointmentNotes notesArray={this.state.appointment_notes}/> : null }
+
+
+                        {this.state.notesTab ? null :
                         <form action="#" className="flex flex-col space-y-8">
                         <div>
                         <h3 className="text-2xl font-semibold">Basic Information</h3>
@@ -83,8 +103,10 @@ class UserDashboard extends Component {
                                 <h3 className="text-2xl font-semibold ">Reviews By Me: </h3>
                                 <hr></hr>
                             </div>
-                            {myReviews.map(review => <ReviewCard ked={review.id} reviewData={review} />)}
+                            {myReviews.map(review => <ReviewCard ked={review.id} reviewData={review} />)} 
+                            
                         </form>   
+    }
                         </div>
                     </div>
                 </div>

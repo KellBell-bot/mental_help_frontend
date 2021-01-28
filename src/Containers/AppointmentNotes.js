@@ -17,7 +17,7 @@ class AppointmentNotes extends Component {
   return (
     <div>
         <div className="d-flex align-items-center justify-content-between mb-3">
-          <h5 className="mb-0 text-bold">Appointment Notes</h5><button onClick={() => this.handleNoteForm()} className="btn btn-link text-muted">Add note</button>
+        <h3 className="text-2xl font-semibold">Appointment Notes</h3><button onClick={() => this.handleNoteForm()} className="btn btn-link text-muted">Add note</button>
         </div>
           {this.state.showForm === true ? <AddNoteForm notesArray={this.props.notesArray} /> : null }
          {this.props.notesArray.map(appnote => <Note key={appnote.id} noteData={appnote}/>)} 

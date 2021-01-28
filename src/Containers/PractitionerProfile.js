@@ -60,11 +60,12 @@ export default class PractitionerProfile extends Component {
                         {/* <!-- Profile widget --> */}
                         <div className="bg-purple-100 shadow rounded overflow-hidden">
                             <div className="px-4 pt-20 pb-4 cover">
-                                <div className="media align-items-end profile-head">
-                                    <div className="profile mr-4"><img src={this.state.practitionerInfo.image} alt="..." width="130" className="rounded mb-2 img-thumbnail"/><a href="#" className="btn btn-outline-dark btn-sm btn-block">Add Practitioner</a>
+                                <div className="flex justify-center">
+                                    <div className="profile mr-4 "><img src={this.state.practitionerInfo.image} alt="..." width="130" className="rounded mr- 0 lg-10 img-thumbnail"/>
                                     <div className="media-body mb-5 text-black">
-                                        <h4 className="mt-0 mb-0">{this.state.practitionerInfo.name}</h4>
+                                        <h4 className="mt-0 mb-0 flex justify-center">{this.state.practitionerInfo.name}</h4>
                                         <p className="small mb-4"> <i className="fas fa-map-marker-alt"></i>{this.state.practitionerInfo.title}</p>
+                                    <a href="#" className="btn btn-outline-dark btn-sm btn-block">Add Practitioner</a>
                                     </div>
                                 </div>
                             </div>

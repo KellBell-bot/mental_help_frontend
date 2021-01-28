@@ -1,13 +1,13 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import './assets/output.css';
 import React, { Component } from "react";
 import { withAlert } from 'react-alert';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route,  Link } from 'react-router-dom'
 import NavBar  from './Components/NavBar';
 import Hero  from './Components/Hero';
 import About from './Components/About'
-import Filter from './Containers/Filter'
+// import Filter from './Containers/Filter'
 import LoginForm from './Containers/LoginForm'
 import SignUp from './Containers/SignUp'
 import PractitionerList from './Components/PractitionerList';
@@ -41,7 +41,8 @@ class App extends Component {
   handleLogin= (userData) =>{
     sessionStorage.setItem("currentUser", userData.id)
     this.setState({
-      isLoggedin: true
+      isLoggedin: true,
+      currentUser: userData.id
     }) 
   }
 
@@ -50,17 +51,23 @@ class App extends Component {
         showSearch: !this.state.showSearch
     })
 }
+
  
+// checkLogIn=()=>{this.state.currentUser === null }
 
   render(){
-    const alert = this.props.alert
+    // const alert = this.props.alert
     // console.log(this.state.practitioners)
-   
+    console.log(this.state.currentUser)
   return (
     <div className="">
       <BrowserRouter>
         <NavBar />
+        <Route exact path="/dashboard" render={() =>  <UserDashboard userData={ this.state.currentUser }/> } />
         <Route  exact path="/" render={() =>  <Hero handleshowSeacrh={this.handleShowSearch} handleTextChange= {this.handleTextChange}/>} />
+        {sessionStorage.getItem("currentUser") !== null ? <Link to="/dashboard" className="btn btn-link text-muted ">Back to Dashboard</Link> : null}
+        
+        
         <Route  exact path="/" render={() =>  <PractitionerList  inputText={this.state.inputValue} practData= {this.state.practitioners}/>} />
         <Route  exact path="/practitioner/:id" render={(props) =>  { const paramsID = props.match.params.id; 
                                                                       
@@ -70,7 +77,6 @@ class App extends Component {
         <Route exact path="/login" render={() => <LoginForm handleLogin= {this.handleLogin}/> } />
         <Route exact path="/about" render={() => <About /> } />
         <Route exact path="/signup" render={() => <SignUp /> } /> 
-        <Route exact path="/dashboard" render={() =>  <UserDashboard userData={ this.state.currentUser }/> } />
       </BrowserRouter>
     </div>
   )}

@@ -13,21 +13,23 @@ export default class ReviewForm extends Component {
 
         const review= {
             comment: this.state.comment,
-            user_id: JSON.parse(sessionStorage.getItem("currentUser")).id,
+            user_id: JSON.parse(sessionStorage.getItem("currentUser")),
             practitioner_id: this.props.practID
         }
 
-         fetch ("http://localhost:3000/reviews", {
-            method: "POST",
-            headers: {"Content-Type" : "application/json"},
-            body: JSON.stringify({review}),
-            
-        }).then(response => response.json())
-        .then(data => this.props.handleNewReview(data))
-    //    const reviewData= await responce.json()
-       
-    //    this.props.handleNewReview(reviewData.review)
-       event.target.reset()
+        
+            fetch ("http://localhost:3000/reviews", {
+               method: "POST",
+               headers: {"Content-Type" : "application/json"},
+               body: JSON.stringify({review}),
+               
+           }).then(response => response.json())
+           .then(data => this.props.handleNewReview(data))
+       //    const reviewData= await responce.json()
+          
+       //    this.props.handleNewReview(reviewData.review)
+          event.target.reset()
+        
     }
 
     
@@ -36,7 +38,7 @@ export default class ReviewForm extends Component {
         return (
             <div>
              <div className="flex items-center justify-center shadow-lg mt-30 mx-8 mb-4 max-w-lg">
-                <form  onSubmit={(event) => this.submitReview(event)} className="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
+             {sessionStorage.getItem("currentUser") !== null ? <form  onSubmit={(event) => this.submitReview(event)} className="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <h2 className="px-4 pt-3 pb-2 text-gray-800 text-lg">Add a new comment</h2>
                     <div className="w-full md:w-full px-3 mb-2 mt-2">
@@ -53,7 +55,7 @@ export default class ReviewForm extends Component {
                         </div>
                     </div>
                     </div>
-                </form> 
+                </form> : alert("Please Sign in")} 
             </div>
             </div>
              
